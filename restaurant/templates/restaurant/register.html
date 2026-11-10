@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<!-- register.html — ახალი მომხმარებლის შექმნის გვერდი. -->
+<html lang="ka">
+<head>
+  <!-- რეგისტრაციის გვერდს საერთო დიზაინი აქვს, მაგრამ აქ JavaScript არ გვჭირდება. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StepBite — რეგისტრაცია</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <!-- ზედა ნავიგაციიდან მომხმარებელი მენიუში ან შესვლის გვერდზე გადავა. -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'menu' %}" class="brand">
+        <span class="brand-mark"><img class="brand-symbol" src="{% static 'stepbite-logo.svg' %}" alt=""></span>
+        step<span>bite</span><span class="brand-dot">.</span>
+      </a>
+      <nav class="nav">
+        <a href="{% url 'menu' %}" class="nav-link">მენიუ</a>
+        <a href="{% url 'login' %}" class="nav-link">შესვლა</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Django-ის RegisterForm ამოწმებს სახელსა და ორივე პაროლს. -->
+  <main class="auth-page container">
+    <div class="auth-card">
+      <span class="eyebrow dark">CREATE ACCOUNT</span>
+      <h1>რეგისტრაცია<span class="accent">.</span></h1>
+      <p>შექმენი ანგარიში და გამოიყენე პირადი კალათა.</p>
+      <form method="post" novalidate>
+        <!-- CSRF იცავს ფორმას არასასურველი მოთხოვნებისგან. -->
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="auth-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <!-- სამი ველი: სახელი, პაროლი, პაროლის გამეორება. -->
+        <div class="auth-field">
+          <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+          {{ form.username }}{{ form.username.errors }}
+        </div>
+        <div class="auth-field">
+          <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+          {{ form.password1 }}{{ form.password1.errors }}
+        </div>
+        <div class="auth-field">
+          <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+          {{ form.password2 }}{{ form.password2.errors }}
+        </div>
+        <button type="submit" class="button button-accent button-full auth-submit">ანგარიშის შექმნა →</button>
+      </form>
+      <p class="auth-switch">უკვე გაქვს ანგარიში? <a href="{% url 'login' %}">შესვლა</a></p>
+    </div>
+  </main>
+</body>
+</html>

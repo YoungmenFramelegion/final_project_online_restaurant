@@ -1,0 +1,1177 @@
+
+/*
+ * style.css — საიტის დიზაინი.
+ * ფერი, ზომა, განლაგება, ბარათები და მობილურზე მორგება აქ არის აღწერილი.
+ * JavaScript-ის ფუნქციონალი ამ ფაილში არ არის — მხოლოდ ვიზუალური მხარე.
+ */
+:root {
+  --ink:#20231e;
+  --muted:#777a71;
+  --paper:#fffefa;
+  --cream:#f8f6ef;
+  --line:#eae9e2;
+  --orange:#e95d39;
+  --orange-dark:#d84828;
+  --olive:#727d47;
+  --shadow:0 14px 40px rgba(39,43,28,.06);
+  font-synthesis:none
+}
+
+/* საერთო წესები: ელემენტების ზომების, შრიფტებისა და ღილაკების საბაზისო სტილი. */
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  background:var(--paper);
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,"DejaVu Sans",sans-serif;
+  color:var(--ink);
+  font-size:14px;
+  line-height:1.6
+}
+button,select {
+  font:inherit
+}
+button {
+  cursor:pointer
+}
+a {
+  text-decoration:none;
+  color:inherit
+}
+button:focus-visible,a:focus-visible,select:focus-visible {
+  outline:3px solid #ffba8e;
+  outline-offset:3px
+}
+.container {
+  width:min(1200px,calc(100% - 64px));
+  margin-inline:auto
+}
+
+/* ზედა მენიუ: StepBite ლოგო, ნავიგაცია და კალათის რაოდენობა. */
+.site-header {
+  height:82px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,254,250,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)
+}
+.header-inner,.nav,.cart-link,.footer-inner {
+  display:flex;
+  align-items:center
+}
+.header-inner {
+  height:100%;
+  justify-content:space-between
+}
+.brand {
+  font-family:Arial,system-ui,sans-serif;
+  font-size:31px;
+  font-weight:900;
+  letter-spacing:-1.9px;
+  line-height:1
+}
+.brand>span:nth-child(2) {
+  font-weight:400
+}
+.brand-dot {
+  color:var(--orange)
+}
+.brand-mark {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  background:var(--orange);
+  width:36px;
+  height:36px;
+  font-size:27px;
+  vertical-align:2px;
+  margin-right:10px;
+  border-radius:12px
+}
+.brand-symbol {
+  display:block;
+  width:25px;
+  height:25px;
+  object-fit:contain
+}
+.nav {
+  gap:38px
+}
+.nav-link {
+  font-size:14px;
+  font-weight:700;
+  color:#696d64;
+  transition:color .15s
+}
+.nav-link:hover,.nav-link.is-active {
+  color:var(--ink)
+}
+.cart-link {
+  gap:10px
+}
+.cart-icon {
+  font-size:23px;
+  font-weight:300;
+  line-height:1
+}
+.cart-badge {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--orange);
+  color:white;
+  border-radius:100px;
+  min-width:23px;
+  height:23px;
+  padding:0 6px;
+  font-size:11px;
+  font-weight:700
+}
+
+/* მთავარი დიდი სექცია: სათაური, ღილაკი და დეკორატიული თეფშის ემბლემა. */
+.hero {
+  background:#f2f0e7;
+  overflow:hidden
+}
+.hero-inner {
+  min-height:460px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:60px
+}
+.hero-content {
+  position:relative;
+  z-index:1;
+  padding:60px 0
+}
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  color:#856d57;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2.4px
+}
+.eyebrow-line {
+  display:inline-block;
+  width:29px;
+  height:1.5px;
+  background:var(--orange)
+}
+.eyebrow.dark {
+  color:var(--orange)
+}
+.hero h1 {
+  font-size:clamp(46px,5.4vw,73px);
+  line-height:1.1;
+  max-width:630px;
+  letter-spacing:-3.5px;
+  margin:22px 0;
+  font-weight:850
+}
+.hero h1 em {
+  font-style:normal;
+  color:var(--orange)
+}
+.hero p {
+  color:#70746e;
+  max-width:500px;
+  font-size:16px;
+  margin:0 0 30px;
+  line-height:1.9
+}
+.hero-cta {
+  display:inline-flex;
+  gap:30px;
+  align-items:center;
+  background:var(--ink);
+  color:white;
+  padding:14px 22px 14px 25px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:750;
+  transition:transform .18s,background .18s
+}
+.hero-cta:hover,.button:hover {
+  transform:translateY(-2px)
+}
+.hero-art {
+  height:460px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.hero-art:before {
+  content:"";
+  position:absolute;
+  width:435px;
+  height:435px;
+  border-radius:50%;
+  background:#e9e4d2;
+  left:30px;
+  top:9px
+}
+.plate {
+  width:360px;
+  height:360px;
+  position:relative;
+  z-index:1;
+  border-radius:50%;
+  background:radial-gradient(circle at center,#2e2b24 0 20%,#3c382f 21% 34%,#ddc6ac 35% 36%,#60594b 37% 52%,#efe4d0 53% 54%,#827864 55% 67%,#3f392f 68% 100%);
+  box-shadow:15px 26px 36px rgba(56,46,29,.22),inset -12px -10px 24px rgba(17,15,11,.18);
+  transform:rotate(-15deg);
+  display:grid;
+  place-items:center
+}
+.plate-center {
+  position:relative;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px
+}
+.utensil {
+  display:inline-block;
+  position:relative;
+  background:var(--orange);
+  box-shadow:0 0 0 1px rgba(255,255,255,.04)
+}
+.fork {
+  width:6px;
+  height:70px;
+  border-radius:4px
+}
+.fork:before {
+  content:"";
+  position:absolute;
+  top:-2px;
+  left:-8px;
+  width:22px;
+  height:18px;
+  background:linear-gradient(to right,transparent 0 2px,var(--orange) 2px 5px,transparent 5px 7px,var(--orange) 7px 10px,transparent 10px 12px,var(--orange) 12px 15px,transparent 15px 17px,var(--orange) 17px 20px,transparent 20px 22px)
+}
+.spoon {
+  width:6px;
+  height:56px;
+  border-radius:4px;
+  margin-top:14px
+}
+.spoon:before {
+  content:"";
+  position:absolute;
+  top:-25px;
+  left:-9px;
+  width:24px;
+  height:32px;
+  background:var(--orange);
+  border-radius:50% 50% 45% 45%/55% 55% 45% 45%
+}
+.plate-smile {
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  width:78px;
+  height:36px;
+  border:4px solid var(--orange);
+  border-color:transparent transparent var(--orange) transparent;
+  border-radius:0 0 90px 90px/0 0 45px 45px;
+  transform:translateX(-50%)
+}
+.plate-line {
+  position:absolute;
+  bottom:59px;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:#d8cfbc
+}
+.floating-label {
+  position:absolute;
+  bottom:72px;
+  right:0;
+  background:#fff;
+  z-index:2;
+  padding:12px 17px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  transform:rotate(8deg);
+  box-shadow:var(--shadow)
+}
+.floating-label span {
+  color:var(--orange);
+  font-size:15px
+}
+.spark {
+  position:absolute;
+  color:var(--orange);
+  font-size:48px
+}
+.s1 {
+  top:45px;
+  right:10px;
+  width:62px;
+  height:62px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(222,134,105,.65);
+  border-radius:50%;
+  background:rgba(234,133,102,.08);
+  box-shadow:0 12px 30px rgba(0,0,0,.06)
+}
+.s1 img {
+  display:block;
+  width:34px;
+  height:34px
+}
+.s2 {
+  bottom:42px;
+  left:32px;
+  font-size:27px
+}
+
+/* მენიუს განლაგება: მარცხნივ ფილტრები, მარჯვნივ კერძების ბარათები. */
+.catalog {
+  padding-top:73px;
+  padding-bottom:100px
+}
+.section-heading {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:34px
+}
+.section-heading h2,.cart-heading h1 {
+  font-size:42px;
+  letter-spacing:-1.6px;
+  margin:4px 0 0;
+  line-height:1.3
+}
+.section-heading p {
+  color:var(--muted);
+  font-size:13px;
+  margin:0 0 7px
+}
+.accent {
+  color:var(--orange)
+}
+.catalog-grid {
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  align-items:start;
+  gap:32px
+}
+
+/* ფილტრები: კატეგორიები და არჩევანის ჩამოსაშლელი მენიუები. */
+.filters {
+  border:1px solid var(--line);
+  padding:25px 22px 27px;
+  background:#fff;
+  border-radius:10px
+}
+.filter-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  padding-bottom:16px
+}
+.filter-header h3 {
+  margin:0;
+  font-size:18px;
+  letter-spacing:-.6px
+}
+.reset-link {
+  border:0;
+  background:transparent;
+  font-size:11px;
+  font-weight:650;
+  color:var(--orange);
+  padding:4px
+}
+.reset-link:hover {
+  text-decoration:underline
+}
+.filter-group {
+  padding:20px 0 8px
+}
+.filter-group h4,.filter-group label {
+  display:block;
+  font-size:12px;
+  margin:0 0 13px;
+  color:#353830;
+  font-weight:800
+}
+.category-list {
+  display:grid;
+  gap:2px
+}
+.category-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:#75766f;
+  border-radius:6px;
+  padding:9px 11px;
+  font-weight:600;
+  font-size:12px;
+  min-height:35px;
+  transition:background .15s,color .15s
+}
+.category-item:hover {
+  background:#f8f6f0
+}
+.category-item.active {
+  background:#fcebe4;
+  color:var(--orange-dark);
+  font-weight:800
+}
+.category-item .category-arrow {
+  opacity:.5
+}
+.form-select {
+  width:100%;
+  height:43px;
+  border:1px solid #deded7;
+  border-radius:6px;
+  background:#fff;
+  padding:0 12px;
+  color:#555951;
+  font-size:12px;
+  outline:none;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='m1 1 4 4 4-4' fill='none' stroke='%23797974' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 13px center
+}
+.form-select:focus {
+  border-color:var(--orange)
+}
+.button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border:0;
+  border-radius:6px;
+  padding:13px 18px;
+  font-weight:750;
+  font-size:12px;
+  transition:transform .16s,background .16s
+}
+.button:disabled,.qty-button:disabled {
+  opacity:.45;
+  cursor:wait;
+  transform:none
+}
+.button-full {
+  width:100%
+}
+.button-dark {
+  background:var(--ink);
+  color:white;
+  margin-top:24px
+}
+.button-accent {
+  background:var(--orange);
+  color:#fff
+}
+.button-accent:hover {
+  background:var(--orange-dark)
+}
+.results-bar {
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px
+}
+.results-bar strong {
+  font-size:17px
+}
+.muted {
+  font-size:12px;
+  color:#979990
+}
+.api-status {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:650
+}
+.status-dot {
+  background:#87a557;
+  width:7px;
+  height:7px;
+  border-radius:50%
+}
+
+/* კერძების ბარათები, მათი ფოტოები, მახასიათებლები და „+“ ღილაკები. */
+.product-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px
+}
+.product-card {
+  border:1px solid #eeede7;
+  border-radius:10px;
+  overflow:hidden;
+  background:white;
+  transition:transform .18s,box-shadow .18s
+}
+.product-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow)
+}
+.product-image {
+  width:100%;
+  aspect-ratio:1.35;
+  object-fit:cover;
+  background:#f7f4ed;
+  display:block
+}
+.product-image-wrap {
+  position:relative;
+  overflow:hidden;
+  background:#faf8ef
+}
+.product-category {
+  position:absolute;
+  top:13px;
+  left:13px;
+  background:rgba(255,255,255,.95);
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.6px;
+  border-radius:4px;
+  padding:5px 8px
+}
+.product-body {
+  padding:17px 17px 16px
+}
+.product-title {
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:-.25px;
+  line-height:1.4;
+  margin:0 0 9px;
+  min-height:42px
+}
+.product-tags {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:16px;
+  min-height:26px
+}
+.tag {
+  background:#f6f5f1;
+  color:#757a6b;
+  padding:4px 7px;
+  border-radius:4px;
+  font-size:10px;
+  font-weight:650;
+  line-height:1.5
+}
+.tag.spicy {
+  background:#fff0e8;
+  color:#da6538
+}
+.tag.positive {
+  background:#eef4e9;
+  color:#597449
+}
+.product-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid var(--line);
+  padding-top:12px
+}
+.product-price {
+  font-weight:900;
+  font-size:21px;
+  letter-spacing:-.6px
+}
+.add-btn {
+  border:0;
+  border-radius:5px;
+  background:var(--ink);
+  color:#fff;
+  width:38px;
+  height:38px;
+  font-size:23px;
+  line-height:1;
+  transition:background .15s,transform .15s
+}
+.add-btn:hover {
+  background:var(--orange);
+  transform:scale(1.04)
+}
+.add-btn:disabled {
+  opacity:.5;
+  cursor:wait
+}
+.loading-panel,.empty-state {
+  grid-column:1/-1;
+  min-height:260px;
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  text-align:center;
+  color:var(--muted);
+  background:var(--cream);
+  border:1px dashed #e1dfd4;
+  border-radius:10px;
+  padding:32px
+}
+.empty-state h3 {
+  color:var(--ink);
+  font-size:19px;
+  margin:7px 0 0
+}
+.empty-state p {
+  margin:4px 0 14px
+}
+.empty-state-symbol {
+  font-size:38px;
+  color:var(--orange)
+}
+.error-panel {
+  background:#fff2ee;
+  color:#8d321f;
+  border-color:#f2c4b2
+}
+.error-panel button {
+  border:0;
+  background:#e75a35;
+  color:#fff;
+  border-radius:5px;
+  padding:9px 18px;
+  margin-top:16px
+}
+.site-footer {
+  border-top:1px solid var(--line);
+  background:#faf9f4
+}
+.footer-inner {
+  min-height:90px;
+  justify-content:space-between;
+  gap:20px;
+  color:#898b82;
+  font-size:11px
+}
+.footer-brand {
+  font-size:25px;
+  color:var(--ink)
+}
+
+/* მოკლე შეტყობინებები მომხმარებლის მოქმედებების შემდეგ. */
+.toast {
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  z-index:30;
+  transform:translateY(15px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s,transform .2s;
+  background:#22281e;
+  color:white;
+  padding:14px 20px;
+  border-radius:7px;
+  box-shadow:0 10px 35px #10101033;
+  font-size:13px;
+  max-width:min(90vw,340px)
+}
+.toast.show {
+  opacity:1;
+  transform:translateY(0)
+}
+.toast.error {
+  background:#b23b27
+}
+
+/* კალათის გვერდის განლაგება, პროდუქტის რიგები და რაოდენობის კონტროლები. */
+.cart-page {
+  min-height:calc(100vh - 175px);
+  padding-top:43px;
+  padding-bottom:95px
+}
+.back-link {
+  font-size:12px;
+  color:#8b8e83;
+  font-weight:650
+}
+.back-link:hover {
+  color:var(--orange)
+}
+.cart-heading {
+  margin:25px 0 35px
+}
+.cart-heading h1 {
+  font-size:48px
+}
+.cart-heading p {
+  font-size:14px;
+  color:var(--muted);
+  margin:9px 0 0
+}
+.cart-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 335px;
+  gap:35px;
+  align-items:start
+}
+.cart-items {
+  display:grid;
+  gap:14px
+}
+.cart-item {
+  display:grid;
+  grid-template-columns:125px minmax(0,1fr) auto;
+  gap:20px;
+  align-items:center;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#fff;
+  padding:14px
+}
+.cart-item-image {
+  width:125px;
+  height:118px;
+  object-fit:cover;
+  border-radius:6px;
+  background:var(--cream)
+}
+.cart-item h3 {
+  font-size:17px;
+  letter-spacing:-.3px;
+  margin:0 0 6px
+}
+.cart-item .mini-category {
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--orange);
+  font-weight:850
+}
+.cart-item-meta {
+  display:flex;
+  gap:5px;
+  margin:10px 0 4px;
+  flex-wrap:wrap
+}
+.cart-item-controls {
+  display:flex;
+  flex-direction:column;
+  align-items:end;
+  gap:11px
+}
+.cart-item-price {
+  font-weight:900;
+  font-size:19px
+}
+.quantity-control {
+  display:flex;
+  align-items:center;
+  border:1px solid #e3e3dc;
+  border-radius:5px;
+  overflow:hidden
+}
+.qty-button {
+  height:31px;
+  width:32px;
+  border:0;
+  background:#f8f7f2;
+  font-weight:800;
+  font-size:18px
+}
+.qty-number {
+  min-width:28px;
+  text-align:center;
+  font-weight:750;
+  font-size:12px
+}
+.remove-button {
+  background:transparent;
+  border:0;
+  color:#a6a49b;
+  font-size:11px;
+  padding:3px
+}
+.remove-button:hover {
+  color:var(--orange)
+}
+
+/* კალათის შეჯამება: რაოდენობა, შუალედური ჯამი და საბოლოო ფასი. */
+.summary-card {
+  padding:29px 27px;
+  background:#f4f1e7;
+  border-radius:10px;
+  position:sticky;
+  top:110px
+}
+.summary-card h2 {
+  font-size:20px;
+  letter-spacing:-.7px;
+  margin:0 0 29px
+}
+.summary-row {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin:14px 0;
+  color:#73776b;
+  font-size:12px
+}
+.summary-row strong {
+  color:#414439
+}
+.summary-divider {
+  height:1px;
+  background:#dddccf;
+  margin:24px 0 18px
+}
+.summary-total {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  font-weight:850
+}
+.summary-total strong {
+  font-size:27px;
+  letter-spacing:-1px
+}
+.summary-note {
+  font-size:11px;
+  color:#97988d;
+  line-height:1.65;
+  margin:14px 0 24px
+}
+.summary-card .button {
+  margin-top:10px
+}
+.placeholder-line {
+  font-size:12px;
+  color:#aaa
+}
+
+/* საშუალო ზომის ეკრანებზე კომპონენტების ზომები და სვეტები იცვლება. */
+@media(max-width:1040px) {
+  .hero-inner {
+    grid-template-columns:1.1fr .9fr;
+    gap:10px
+  }
+  .hero h1 {
+    font-size:53px
+  }
+  .hero-art:before {
+    width:330px;
+    height:330px;
+    top:65px
+  }
+  .plate {
+    width:280px;
+    height:280px
+  }
+  .plate-line {
+    bottom:40px;
+    font-size:7px
+  }
+  .plate-center {
+    width:120px;
+    height:120px;
+    gap:14px
+  }
+  .fork {
+    width:5px;
+    height:58px
+  }
+  .fork:before {
+    left:-7px;
+    width:19px;
+    height:15px;
+    background:linear-gradient(to right,transparent 0 2px,var(--orange) 2px 4px,transparent 4px 6px,var(--orange) 6px 8px,transparent 8px 10px,var(--orange) 10px 12px,transparent 12px 14px,var(--orange) 14px 16px,transparent 16px 19px)
+  }
+  .spoon {
+    width:5px;
+    height:46px
+  }
+  .spoon:before {
+    top:-21px;
+    left:-8px;
+    width:20px;
+    height:26px
+  }
+  .plate-smile {
+    bottom:12px;
+    width:60px;
+    height:28px;
+    border-width:3px
+  }
+  .catalog-grid {
+    grid-template-columns:220px minmax(0,1fr);
+    gap:22px
+  }
+  .product-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+  .cart-layout {
+    grid-template-columns:minmax(0,1fr) 290px;
+    gap:20px
+  }
+  .cart-item {
+    grid-template-columns:100px minmax(0,1fr) auto;
+    gap:12px
+  }
+  .cart-item-image {
+    width:100px;
+    height:105px
+  }
+}
+
+/* მობილურზე მენიუ ერთ სვეტად გადადის, მთავარი დეკორაცია იმალება. */
+@media(max-width:700px) {
+  .container {
+    width:min(100% - 32px,550px)
+  }
+  .site-header {
+    height:68px
+  }
+  .brand {
+    font-size:25px
+  }
+  .brand-mark {
+    width:29px;
+    height:29px;
+    font-size:22px;
+    margin-right:6px;
+    border-radius:9px
+  }
+  .brand-symbol {
+    width:21px;
+    height:21px
+  }
+  .nav {
+    gap:15px
+  }
+  .nav-link {
+    font-size:12px
+  }
+  .hero-inner {
+    display:block;
+    min-height:0
+  }
+  .hero-content {
+    padding:55px 0 65px
+  }
+  .hero h1 {
+    font-size:clamp(43px,11vw,60px);
+    letter-spacing:-2px
+  }
+  .hero p {
+    font-size:14px
+  }
+  .hero-art {
+    display:none
+  }
+  .catalog {
+    padding-top:45px;
+    padding-bottom:65px
+  }
+  .section-heading {
+    display:block
+  }
+  .section-heading h2 {
+    font-size:37px
+  }
+  .section-heading p {
+    margin-top:8px
+  }
+  .catalog-grid {
+    display:block
+  }
+  .filters {
+    margin-bottom:28px;
+    padding:20px
+  }
+  .filter-group {
+    padding:13px 0 2px
+  }
+  .results-bar {
+    align-items:start;
+    height:auto;
+    gap:10px
+  }
+  .api-status {
+    font-size:9px
+  }
+  .product-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px
+  }
+  .product-body {
+    padding:12px
+  }
+  .product-title {
+    font-size:13px;
+    min-height:39px
+  }
+  .product-tags {
+    min-height:35px
+  }
+  .tag {
+    font-size:9px
+  }
+  .product-price {
+    font-size:17px
+  }
+  .add-btn {
+    width:32px;
+    height:32px
+  }
+  .footer-inner {
+    min-height:95px;
+    flex-wrap:wrap;
+    padding:19px 0;
+    justify-content:center;
+    gap:6px 20px
+  }
+  .cart-page {
+    padding:30px 0 60px
+  }
+  .cart-heading h1 {
+    font-size:40px
+  }
+  .cart-layout {
+    grid-template-columns:1fr
+  }
+  .summary-card {
+    position:static
+  }
+  .cart-item {
+    grid-template-columns:90px minmax(0,1fr);
+    gap:10px
+  }
+  .cart-item-image {
+    width:90px;
+    height:92px
+  }
+  .cart-item-controls {
+    grid-column:2;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center
+  }
+  .cart-item h3 {
+    font-size:14px
+  }
+  .cart-item-price {
+    font-size:16px
+  }
+  .cart-item-meta {
+    margin:5px 0
+  }
+}
+
+/* ძალიან ვიწრო ტელეფონებისთვის დამატებითი მორგება. */
+@media(max-width:370px) {
+  .product-grid {
+    grid-template-columns:1fr
+  }
+  .product-image {
+    aspect-ratio:1.7
+  }
+  .nav-link {
+    font-size:11px
+  }
+  .cart-link {
+    gap:4px
+  }
+}
+
+
+/* ანგარიშის ზედა მენიუ: სახელი, გამოსვლა და რეგისტრაციის ბმული. */
+.account-name {
+  max-width:130px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:12px;
+  color:var(--muted);
+  font-weight:750
+}
+.logout-form {margin:0;display:inline-flex}
+.logout-button {border:0;background:transparent;padding:0;cursor:pointer;font:inherit;font-weight:750;font-size:13px}
+.register-link {color:var(--orange)!important}
+
+/* რეგისტრაციისა და შესვლის ფორმების დიზაინი. */
+.auth-page {
+  min-height:calc(100vh - 82px);
+  display:grid;
+  place-items:center;
+  padding:55px 16px
+}
+.auth-card {
+  width:min(100%,450px);
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:15px;
+  padding:36px
+}
+.auth-card h1 {font-size:36px;line-height:1.2;letter-spacing:-1px;margin:13px 0 10px}
+.auth-card>p {font-size:13px;color:var(--muted);margin:0 0 22px}
+.auth-field {margin-bottom:16px}
+.auth-field label {font-size:12px;font-weight:750;display:block;margin-bottom:8px}
+.auth-field input {
+  display:block;
+  width:100%;
+  height:44px;
+  border:1px solid #dddcd4;
+  background:#fff;
+  border-radius:7px;
+  padding:0 12px;
+  color:var(--ink);
+  outline:none;
+  font:inherit
+}
+.auth-field input:focus {border-color:var(--orange)}
+/* მომხმარებლის არასწორი პაროლისა და სხვა შეცდომების გაფორმება. */
+.auth-card .errorlist {list-style:none;margin:6px 0 0;padding:0;color:#c64729;font-size:11px}
+.auth-error {padding:12px 14px;background:#fff2ec;border-radius:7px;color:#a33123;font-size:12px;margin-bottom:15px}
+.auth-submit {justify-content:center;cursor:pointer;margin-top:11px}
+.auth-switch {font-size:12px!important;margin:20px 0 0!important;text-align:center}
+.auth-switch a {color:var(--orange);font-weight:800}
+
+/* ტელეფონზე რეგისტრაციის ფორმისა და ზედა მენიუს ზომის მორგება. */
+@media(max-width:750px) {
+  .nav {gap:10px;flex-wrap:wrap;justify-content:flex-end}
+  .account-name {max-width:80px}
+  .logout-button {font-size:11px}
+  .auth-card {padding:24px}
+  .auth-page {padding:30px 12px}
+  .nav .register-link {font-size:11px}
+}

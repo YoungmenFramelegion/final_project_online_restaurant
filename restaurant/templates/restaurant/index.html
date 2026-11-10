@@ -1,0 +1,149 @@
+{% load static %}
+<!doctype html>
+<!-- index.html — მენიუს გვერდის HTML. პროდუქტებს ამ გვერდზე app.js ამატებს. -->
+<html lang="ka">
+<head>
+  <!-- სათაური, მობილურის მხარდაჭერა, საერთო დიზაინი და JavaScript. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StepBite — შეუკვეთე სასურველი კერძები მარტივად">
+  <title>StepBite — მენიუ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="{% static 'app.js' %}" defer></script>
+</head>
+<body data-page="menu" data-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
+  <!-- ზედა ნაწილი: ლოგო, მენიუს/კალათის ბმულები და შესვლა/გამოსვლა. -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'menu' %}" class="brand" aria-label="StepBite — მთავარი გვერდი">
+        <span class="brand-mark" aria-hidden="true">
+          <img class="brand-symbol" src="{% static 'stepbite-logo.svg' %}" width="25" height="25" alt="">
+        </span> step<span>bite</span><span class="brand-dot">.</span>
+      </a>
+      <nav class="nav" aria-label="მთავარი მენიუ">
+        <a href="{% url 'menu' %}" class="nav-link is-active" aria-current="page">მენიუ</a>
+        <a href="{% url 'cart' %}" class="nav-link cart-link">
+          <span class="cart-icon" aria-hidden="true">▤</span> კალათა
+          <span class="cart-badge" data-cart-count>0</span>
+        </a>
+        <!-- შესულ ადამიანს ვაჩვენებთ მომხმარებლის სახელს, სხვას — რეგისტრაციას და შესვლას. -->
+        {% if user.is_authenticated %}
+          <span class="account-name" title="შესული მომხმარებელი">{{ user.username }}</span>
+          <form class="logout-form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="nav-link logout-button" type="submit">გასვლა</button>
+          </form>
+        {% else %}
+          <a class="nav-link" href="{% url 'login' %}">შესვლა</a>
+          <a class="nav-link register-link" href="{% url 'register' %}">რეგისტრაცია</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- მთავარი მისასალმებელი ნაწილი: ტექსტი, მენიუზე გადასვლის ღილაკი და დეკორატიული თეფში. -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="eyebrow"><span class="eyebrow-line"></span> RESTAURANT MENU</span>
+          <h1>აირჩიე შენი <em>საყვარელი</em> გემო.</h1>
+          <p>აღმოაჩინე ახალი კერძები, შეარჩიე შენი გემოვნებით და დაამატე კალათაში ერთი დაწკაპუნებით.</p>
+          <a class="hero-cta" href="#dishes">აღმოაჩინე მენიუ <span aria-hidden="true">↗</span></a>
+        </div>
+        <!-- ეს ემბლემა მხოლოდ დიზაინისთვისაა; პროდუქტების მონაცემებთან კავშირი არ აქვს. -->
+        <div class="hero-art" aria-hidden="true">
+          <div class="plate">
+            <div class="plate-center">
+              <span class="utensil fork"></span>
+              <span class="utensil spoon"></span>
+              <span class="plate-smile"></span>
+            </div>
+            <span class="plate-line">FRESH • DELICIOUS • EVERY DAY</span>
+          </div>
+          <span class="floating-label">MADE WITH LOVE <span>♥</span></span>
+          <span class="spark s1"><img src="{% static 'hero-utensils.svg' %}" width="34" height="34" alt=""></span>
+          <span class="spark s2">✳</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- კერძების სექცია: მარცხნივ ფილტრები, მარჯვნივ პროდუქტები. -->
+    <section class="catalog container" id="dishes">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow dark">EXPLORE THE MENU</span>
+          <h2>ჩვენი მენიუ<span class="accent">.</span></h2>
+        </div>
+        <p>აირჩიე შენთვის სასურველი კატეგორია და ფილტრები</p>
+      </div>
+      <div class="catalog-grid">
+        <!-- ფილტრების ფორმა: კატეგორია, სიცხარე, ნიგოზი, ვეგეტარიანული. -->
+        <aside class="filters" aria-label="კერძების ფილტრები">
+          <div class="filter-header">
+            <h3>ფილტრები</h3>
+            <button type="button" class="reset-link" id="clear-filters">გასუფთავება ↺</button>
+          </div>
+          <!-- კატეგორიის ღილაკები app.js-დან ივსება. -->
+          <div class="filter-group">
+            <h4>კატეგორიები</h4>
+            <div id="categories" class="category-list"><span class="placeholder-line">იტვირთება...</span></div>
+          </div>
+          <div class="filter-group">
+            <label for="spiciness">სიცხარის დონე</label>
+            <select id="spiciness" class="form-select">
+              <option value="">ნებისმიერი</option>
+              <option value="0">0 — არა ცხარე</option>
+              <option value="1">1 — მსუბუქი</option>
+              <option value="2">2 — საშუალო</option>
+              <option value="3">3 — ცხარე</option>
+              <option value="4">4 — ძალიან ცხარე</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="nuts">ნიგოზი</label>
+            <select id="nuts" class="form-select">
+              <option value="">ყველა კერძი</option>
+              <option value="false">ნიგვზის გარეშე</option>
+              <option value="true">ნიგვზიანი</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="vegeterian">ვეგეტარიანული</label>
+            <select id="vegeterian" class="form-select">
+              <option value="">ყველა კერძი</option>
+              <option value="true">მხოლოდ ვეგეტარიანული</option>
+              <option value="false">არავეგეტარიანული</option>
+            </select>
+          </div>
+          <!-- JavaScript ღილაკზე დაჭერისას არჩეული პარამეტრებით API-ს მიმართავს. -->
+          <button id="apply-filters" class="button button-dark button-full" type="button">
+            ფილტრის გამოყენება <span aria-hidden="true">→</span>
+          </button>
+        </aside>
+
+        <!-- #products-ში app.js ქმნის რეალური კერძების ბარათებს. -->
+        <div class="catalog-content">
+          <div class="results-bar">
+            <div><strong id="results-label">კერძები</strong> <span class="muted" id="results-count"></span></div>
+            <span class="api-status"><span class="status-dot"></span> IT Step Restaurant API</span>
+          </div>
+          <div id="products" class="product-grid" aria-live="polite">
+            <div class="loading-panel">კერძები იტვირთება...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- გვერდის ქვედა ინფორმაცია და პატარა შეტყობინებების ადგილი. -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="brand footer-brand">step<span>bite</span><span class="brand-dot">.</span></span>
+      <span>სასწავლო პროექტი • IT Step Academy API</span>
+      <span>© 2026 StepBite</span>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
