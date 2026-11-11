@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<!-- cart.html — კალათის გვერდის HTML. მონაცემებს ამატებს app.js, რომელიც Django API-ს უკავშირდება. -->
+<html lang="ka">
+<head>
+  <!-- გვერდის სახელი და საერთო სტილის/JavaScript ფაილების ჩართვა. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StepBite — შეკვეთის კალათა">
+  <title>StepBite — კალათა</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="{% static 'app.js' %}" defer></script>
+</head>
+<body data-page="cart" data-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
+  <!-- ზედა ნავიგაცია: ლოგო, მენიუს/კალათის ბმულები და ანგარიშის მართვა. -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'menu' %}" class="brand" aria-label="StepBite — მთავარი გვერდი">
+        <span class="brand-mark" aria-hidden="true">
+          <img class="brand-symbol" src="{% static 'stepbite-logo.svg' %}" width="25" height="25" alt="">
+        </span> step<span>bite</span><span class="brand-dot">.</span>
+      </a>
+      <nav class="nav" aria-label="მთავარი მენიუ">
+        <a href="{% url 'menu' %}" class="nav-link">მენიუ</a>
+        <a href="{% url 'cart' %}" class="nav-link cart-link is-active" aria-current="page">
+          <span class="cart-icon" aria-hidden="true">▤</span> კალათა
+          <span class="cart-badge" data-cart-count>0</span>
+        </a>
+        <!-- თუ მომხმარებელი შესულია, ვაჩვენებთ მის სახელსა და გამოსვლის ღილაკს. -->
+        {% if user.is_authenticated %}
+          <span class="account-name" title="შესული მომხმარებელი">{{ user.username }}</span>
+          <form class="logout-form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="nav-link logout-button" type="submit">გასვლა</button>
+          </form>
+        {% else %}
+          <a class="nav-link" href="{% url 'login' %}">შესვლა</a>
+          <a class="nav-link register-link" href="{% url 'register' %}">რეგისტრაცია</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <!-- ძირითადი ნაწილი: მარცხნივ კერძები, მარჯვნივ შეკვეთის ჯამი. -->
+  <main class="container cart-page">
+    <a class="back-link" href="{% url 'menu' %}">← მენიუზე დაბრუნება</a>
+    <div class="cart-heading">
+      <div>
+        <span class="eyebrow dark">YOUR ORDER</span>
+        <h1>შენი კალათა<span class="accent">.</span></h1>
+        <p>შეამოწმე არჩეული კერძები და შეცვალე რაოდენობა</p>
+      </div>
+    </div>
+    <div class="cart-layout">
+      <!-- #cart-items-ში app.js ამატებს თითოეულ კერძს და რაოდენობის ღილაკებს. -->
+      <section class="cart-items" id="cart-items" aria-live="polite">
+        <div class="loading-panel">კალათა იტვირთება...</div>
+      </section>
+
+      <!-- თანხა ჯერ ნულია; app.js ითვლის და ცვლის სამ რიცხვს. -->
+      <aside class="summary-card">
+        <h2>შეკვეთის შეჯამება</h2>
+        <div class="summary-row">
+          <span>პროდუქტების რაოდენობა</span><strong id="summary-quantity">0</strong>
+        </div>
+        <div class="summary-row">
+          <span>შუალედური ჯამი</span><strong id="subtotal">$0.00</strong>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-total">
+          <span>ჯამური თანხა</span><strong id="total">$0.00</strong>
+        </div>
+        <p class="summary-note">ფასი ითვლება ავტომატურად, პროდუქტების რაოდენობის მიხედვით.</p>
+        <a href="{% url 'menu' %}" class="button button-accent button-full">
+          კერძების დამატება <span aria-hidden="true">→</span>
+        </a>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ქვედა ინფორმაცია და პატარა შეტყობინებების ადგილი. -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="brand footer-brand">step<span>bite</span><span class="brand-dot">.</span></span>
+      <span>სასწავლო პროექტი • IT Step Academy API</span>
+      <span>© 2026 StepBite</span>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

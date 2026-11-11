@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Salads"
+  },
+  {
+    "id": 2,
+    "name": "Soups"
+  },
+  {
+    "id": 3,
+    "name": "Chicken-Dishes"
+  },
+  {
+    "id": 4,
+    "name": "Beef-Dishes"
+  },
+  {
+    "id": 5,
+    "name": "Seafood-Dishes"
+  },
+  {
+    "id": 6,
+    "name": "Vegetable-Dishes"
+  },
+  {
+    "id": 7,
+    "name": "Bits&Bites"
+  },
+  {
+    "id": 8,
+    "name": "On-The-Side"
+  }
+]

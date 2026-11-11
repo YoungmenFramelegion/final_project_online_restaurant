@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<!-- login.html — უკვე რეგისტრირებული მომხმარებლის შესვლის გვერდი. -->
+<html lang="ka">
+<head>
+  <!-- ფორმას იგივე დიზაინი აქვს, რაც დანარჩენ საიტს. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StepBite — შესვლა</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <!-- საიტის ლოგო და სხვა გვერდებზე გადასასვლელი ბმულები. -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'menu' %}" class="brand">
+        <span class="brand-mark"><img class="brand-symbol" src="{% static 'stepbite-logo.svg' %}" alt=""></span>
+        step<span>bite</span><span class="brand-dot">.</span>
+      </a>
+      <nav class="nav">
+        <a href="{% url 'menu' %}" class="nav-link">მენიუ</a>
+        <a href="{% url 'register' %}" class="nav-link register-link">რეგისტრაცია</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- პაროლს და მომხმარებლის სახელს ამოწმებს Django-ის AuthenticationForm. -->
+  <main class="auth-page container">
+    <div class="auth-card">
+      <span class="eyebrow dark">WELCOME BACK</span>
+      <h1>შესვლა<span class="accent">.</span></h1>
+      <p>შეიყვანე შენი მონაცემები, რომ კალათაზე წვდომა მიიღო.</p>
+      <form method="post" novalidate>
+        <!-- Django-ის ფორმის დაცვა. -->
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="auth-error">მომხმარებლის სახელი ან პაროლი არასწორია.</div>
+        {% endif %}
+        <!-- შესასვლელი ველები და შეცდომის მოკლე შეტყობინებები. -->
+        <div class="auth-field">
+          <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+          {{ form.username }}{{ form.username.errors }}
+        </div>
+        <div class="auth-field">
+          <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+          {{ form.password }}{{ form.password.errors }}
+        </div>
+        <!-- next გვაბრუნებს იმ გვერდზე, რომლის გახსნაც შესვლამდე გვინდოდა. -->
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="button button-accent button-full auth-submit">შესვლა →</button>
+      </form>
+      <p class="auth-switch">ჯერ არ გაქვს ანგარიში? <a href="{% url 'register' %}">რეგისტრაცია</a></p>
+    </div>
+  </main>
+</body>
+</html>

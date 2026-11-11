@@ -1,0 +1,10 @@
+<!-- StepBite-ის პატარა ლოგო ზედა მარცხენა კუთხეში, ორივე გვერდზე. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+  <g fill="none" stroke="#FFF7EF" stroke-linecap="round" stroke-linejoin="round">
+    <!-- ჩანგალი — ბრენდის პატარა ნიშნის მარცხენა ნაწილი. -->
+    <path d="M6.25 5.3v7.2c0 2.7 1.45 4.2 3.75 4.2s3.75-1.5 3.75-4.2V5.3M10 5.3v21.1" stroke-width="2.05"/>
+    <!-- კოვზი — ბრენდის პატარა ნიშნის მარჯვენა ნაწილი. -->
+    <ellipse cx="22.15" cy="10.0" rx="3.5" ry="5.55" stroke-width="2.05"/>
+    <path d="M22.15 15.6v10.8" stroke-width="2.05"/>
+  </g>
+</svg>
